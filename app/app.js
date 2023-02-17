@@ -10,6 +10,7 @@ import userRoutes from '../routes/UserRoutes.js';
 //instanciar o express
 const app = express()
 dbConnect()
+app.use(express.json())
 
 //rotas
 app.use('/', userRoutes)
