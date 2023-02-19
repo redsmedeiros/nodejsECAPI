@@ -4,6 +4,7 @@ dotenv.config()
 import express from 'express';
 import dbConnect from '../config/dBconnect.js';
 import { globalErrorHandler, notFound } from '../middlewares/globalErrorHandler.js';
+import productRoutes from '../routes/ProductRoutes.js';
 import userRoutes from '../routes/UserRoutes.js';
 
 
@@ -15,6 +16,7 @@ app.use(express.json())
 
 //rotas
 app.use('/api/v1/users', userRoutes)
+app.use('/api/v1/products', productRoutes)
 
 //error midlleware
 app.use(notFound)

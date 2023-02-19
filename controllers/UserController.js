@@ -3,6 +3,8 @@ import User  from '../model/User.js';
 import bcrypt from 'bcryptjs';
 import expressAsyncHandler from 'express-async-handler';
 import generateToken from '../utils/generateToken.js';
+import { getTokenFromHeader } from '../utils/getTokenFromHeader.js';
+import { verifyToken } from '../utils/verifyToken.js';
 
 //@desc Register user
 //@route POST /api/v1/users/register
@@ -71,6 +73,11 @@ export const loginUserCtrl = expressAsyncHandler(async (req, res)=>{
 
 export const getUserProfileCtrl = expressAsyncHandler(async (req, res)=>{
     
-    //pegar o token dos headers
-    const headerObj = req.headers.authorization.split(' ')[1]
+ const token = getTokenFromHeader(req)
+
+ const verified = verifyToken(token)
+
+ console.log(verified)
+
+
 })
