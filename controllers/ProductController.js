@@ -198,3 +198,17 @@ export const updateProductCtrl = expressAsyncHandler(async (req, res)=>{
     })
 
 })
+
+//@desc delete product
+//@route DELETE /api/products/:id/update
+//@access Private/Admin
+
+export const deleteProductCtrl = expressAsyncHandler(async (req, res)=>{
+
+    await Product.findByIdAndDelete(req.params.id)
+
+    res.json({
+        status: "success",
+        message: "Product deleted successfully"
+    })
+})
