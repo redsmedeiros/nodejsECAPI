@@ -9,8 +9,8 @@ import { isLoggedIN } from '../middlewares/isLoggedIn.js';
 
 //rotas
 categoryRoutes.post('/', isLoggedIN, createCategoryCtrl)
-categoryRoutes.get('/', isLoggedIN, getAllCategoryCtrl)
-categoryRoutes.get('/:id', isLoggedIN, getSingleCategoryCtrl)
+categoryRoutes.get('/', getAllCategoryCtrl)
+categoryRoutes.get('/:id', getSingleCategoryCtrl)
 categoryRoutes.put('/:id', isLoggedIN, updateCategoryCtrl)
 categoryRoutes.delete('/:id/delete', isLoggedIN, deleteCategoryCtrl)
 
