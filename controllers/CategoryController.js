@@ -67,18 +67,19 @@ export const updateCategoryCtrl = expressAsyncHandler(async (req, res)=>{
 
     const { name } = req.body
 
-    const category = Category.findByIdAndUpdate(req.params.id, 
-        { 
-            name, 
-        }, 
-        { 
-            new: true
-        })
+  
+
+    const color = await Category.findByIdAndUpdate(req.params.id, {
+        name,
+    },
+    {
+        new: true
+    })
 
     res.json({
         status: "success",
-        message: "category updated successfully",
-        category
+        message: "Category updated successfully",
+        color
     })
 
 })
