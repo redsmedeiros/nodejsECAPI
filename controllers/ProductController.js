@@ -1,5 +1,6 @@
 import Product from "../model/Product.js";
 import Category from "../model/Category.js"
+import Brand from "../model/Brand.js"
 import expressAsyncHandler from "express-async-handler";
 
 //@desc Create new product
@@ -10,7 +11,7 @@ export const createProductCtrl = expressAsyncHandler(async (req, res)=>{
 
 
     //pegar as variaveis do corpo da req
-    const {name, description, category, sizes, colors, user, price, totalQty, brand} = req.body
+    const {name, description, category, sizes, colors, price, totalQty, brand} = req.body
 
     //verificar a existencia
     const productExists = await Product.findOne({ name })
@@ -24,6 +25,13 @@ export const createProductCtrl = expressAsyncHandler(async (req, res)=>{
 
     if(!categoryFound){
         throw new Error('Category not found')
+    }
+
+    //achar o brand
+    const brandFound = await Brand.findOne({name:  brand.toLowerCase()})
+
+    if(!brandFound){
+        throw new Error('Brand not found')
     }
     
 
@@ -44,6 +52,11 @@ export const createProductCtrl = expressAsyncHandler(async (req, res)=>{
    categoryFound.products.push(product._id)
 
    await categoryFound.save()
+
+   //push na brand e salvar
+   brandFound.products.push(product._id)
+
+   await brandFound.save()
 
     //enviar a resposta
     res.json({
