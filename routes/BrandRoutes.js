@@ -1,5 +1,5 @@
 import express from "express";
-import { createBrandCtrl, deleteBrandCtrl, getAllBrandsCtrl, getSingleBrandCtrl, updateBrandCtrl } from "../controllers/BrandController";
+import { createBrandCtrl, deleteBrandCtrl, getAllBrandsCtrl, getSingleBrandCtrl, updateBrandCtrl } from "../controllers/BrandController.js";
 
 const brandRoutes = express.Router();
 
@@ -7,10 +7,10 @@ const brandRoutes = express.Router();
 import { isLoggedIN } from '../middlewares/isLoggedIn.js';
 
 //rotas
-categoryRoutes.post('/', isLoggedIN, createBrandCtrl)
-categoryRoutes.get('/', getAllBrandsCtrl)
-categoryRoutes.get('/:id', getSingleBrandCtrl)
-categoryRoutes.put('/:id', isLoggedIN, updateBrandCtrl)
-categoryRoutes.delete('/:id/delete', isLoggedIN, deleteBrandCtrl)
+brandRoutes.post('/', isLoggedIN, createBrandCtrl)
+brandRoutes.get('/', getAllBrandsCtrl)
+brandRoutes.get('/:id', getSingleBrandCtrl)
+brandRoutes.put('/:id', isLoggedIN, updateBrandCtrl)
+brandRoutes.delete('/:id/delete', isLoggedIN, deleteBrandCtrl)
 
 export default brandRoutes;

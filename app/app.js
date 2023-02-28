@@ -4,6 +4,7 @@ dotenv.config()
 import express from 'express';
 import dbConnect from '../config/dBconnect.js';
 import { globalErrorHandler, notFound } from '../middlewares/globalErrorHandler.js';
+import brandRoutes from '../routes/BrandRoutes.js';
 import categoryRoutes from '../routes/CategoryRoutes.js';
 import productRoutes from '../routes/ProductRoutes.js';
 import userRoutes from '../routes/UserRoutes.js';
@@ -19,6 +20,7 @@ app.use(express.json())
 app.use('/api/v1/users', userRoutes)
 app.use('/api/v1/products', productRoutes)
 app.use('/api/v1/categories', categoryRoutes)
+app.use('/api/v1/brands', brandRoutes)
 
 //error midlleware
 app.use(notFound)
