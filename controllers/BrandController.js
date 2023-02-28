@@ -28,7 +28,7 @@ export const createBrandCtrl = expressAsyncHandler( async (req, res)=>{
     })
 })
 
-//@desc Get all rands
+//@desc Get all grands
 //@route GET /api/v1/brands
 //@access Public
 export const getAllBrandsCtrl = expressAsyncHandler(async (req, res)=>{
@@ -40,4 +40,53 @@ export const getAllBrandsCtrl = expressAsyncHandler(async (req, res)=>{
         message: "Brand fetched successfully",
         brands
     });
+})
+
+//@desc Get single brand
+//@route GET /api/v1/:id
+//@access Public
+export const getSingleBrandCtrl = expressAsyncHandler(async (req, res)=>{
+
+    const brand = await Brand.findById(req.params.id);
+
+    res.json({
+        status: "success",
+        message: "Brand fetched succesfully",
+        brand
+    })
+
+})
+
+//@desc Update brand
+//@route PUT /api/v1/:id
+//@access Private/Admin
+export const updateBrandCtrl = expressAsyncHandler(async (req, res)=>{
+
+    const { name } = req.body;
+
+    const brand = await Brand.findByIdAndUpdate(req.params.id, {
+        name
+    },
+    {
+        new: true
+    })
+
+    res.json({
+        status: "success",
+        message: "Brand fetched succesfully",
+        brand
+    })
+})
+
+//@desc delete brand
+//@route DELETE /api/v1/:id
+//@access Private/Admin
+export const deleteBrandCtrl = expressAsyncHandler( async (req, res)=>{
+
+    await Brand.findByIdAndDelete(req.params.id)
+
+    res.json({
+        status: "success",
+        message: "Brand delete succesfully"
+    })
 })
