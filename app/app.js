@@ -7,6 +7,7 @@ import { globalErrorHandler, notFound } from '../middlewares/globalErrorHandler.
 import brandRoutes from '../routes/BrandRoutes.js';
 import categoryRoutes from '../routes/CategoryRoutes.js';
 import colorRoutes from '../routes/ColorRoutes.js';
+import ordersRoutes from '../routes/OrdersRoutes.js';
 import productRoutes from '../routes/ProductRoutes.js';
 import reviewRoutes from '../routes/ReviewRoutes.js';
 import userRoutes from '../routes/UserRoutes.js';
@@ -25,6 +26,7 @@ app.use('/api/v1/categories', categoryRoutes)
 app.use('/api/v1/brands', brandRoutes)
 app.use('/api/v1/colors', colorRoutes)
 app.use('/api/v1/reviews/', reviewRoutes)
+app.use('/api/v1/orders/', ordersRoutes)
 
 //error midlleware
 app.use(notFound)
