@@ -64,6 +64,28 @@ const ProductSchema = new Schema({
 })
 
 //virtual
+ProductSchema.virtual('totalReviews').get(function(){
+    
+    const product = this
+
+    return product?.reviews?.length
+})
+
+//avarage rating
+ProductSchema.virtual('avarageRating').get(function(){
+
+    let ratingsTotal = 0
+
+    const product = this
+
+    product?.reviews?.forEach((review)=>{
+        ratingsTotal += review?.rating
+    })
+
+    const avarageRating = ratingsTotal / product?.reviews?.length
+
+    return avarageRating;
+})
 
 const Product = mongoose.model("Product", ProductSchema)
 
