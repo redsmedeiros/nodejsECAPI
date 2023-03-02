@@ -36,10 +36,16 @@ export const createOrderCtrl = expressAsyncHandler( async (req, res)=>{
    //procurar por produtos que tenham orderItems com o mesmo _id
    const products = await Product.find({_id: {$in: orderItems}})
 
-   orderItems?.map((everyOrderObj)=>{
+   orderItems?.map(async (everyOrderObj)=>{
 
       const product = products?.find((product)=>{
-        
+         return product?._id.toString() === everyOrderObj?._id.toString()
       })
+
+      if(product){
+         product.totalSold += everyOrderObj.qty
+      }
+
+      await product.save()
    })
 })
