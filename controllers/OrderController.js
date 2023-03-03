@@ -119,8 +119,19 @@ export const getSingleOrdersCtrl = expressAsyncHandler( async (req,res)=>{
 })
 
 //@desc update order to delivered
-//@route PUT /api/v1/orders/:id/deliver
-//@access Private
+//@route PUT /api/v1/orders//update:id
+//@access Private/adim
 export const updateOrderToDelivery = expressAsyncHandler( async (req, res)=>{
-   
+
+      const id = req.params.id
+
+      const updateOrder = await Order.findByIdAndUpdate(id, {
+         status: req.body.status
+      }, { new: true})
+
+      res.status(200).json({
+         success: true,
+         message: "Order delivered",
+         updateOrder
+      })
 })
