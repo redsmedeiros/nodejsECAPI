@@ -79,7 +79,7 @@ export const createOrderCtrl = expressAsyncHandler( async (req, res)=>{
    const session = await stripe.checkout.sessions.create({
       line_items: convertedOrders,
       metadata: {
-         orderId: order?._id
+         orderId: JSON.stringify(order?._id)
       },
       mode: 'payment',
       success_url: 'http://localhost:3000/success',
@@ -88,4 +88,39 @@ export const createOrderCtrl = expressAsyncHandler( async (req, res)=>{
 
    res.send({url: session.url})
 
+})
+
+//@desc get All orders
+//@route GET /api/v1/orders
+//@access Private
+export const getAllOrdersCtrl = expressAsyncHandler( async (req, res)=>{
+   
+   const orders = await Order.find()
+
+   res.json({
+      success: true,
+      message: "All orders",
+      orders
+   })
+})
+
+//@desc get sungle orders
+//@route GET /api/v1/orders/:id
+//@access Private
+export const getSingleOrdersCtrl = expressAsyncHandler( async (req,res)=>{
+
+   const order = await Order.findById(req.params.id)
+
+   res.json({
+      success: true,
+      message: 'Single Order',
+      order
+   })
+})
+
+//@desc update order to delivered
+//@route PUT /api/v1/orders/:id/deliver
+//@access Private
+export const updateOrderToDelivery = expressAsyncHandler( async (req, res)=>{
+   
 })
