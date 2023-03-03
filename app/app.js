@@ -45,16 +45,17 @@ app.post('/webhook', express.raw({type: 'application/json'}), (request, response
       response.status(400).send(`Webhook Error: ${err.message}`);
       return;
     }
-  
-    // Handle the event
-    switch (event.type) {
-      case 'payment_intent.succeeded':
-        const paymentIntentSucceeded = event.data.object;
-        // Then define and call a function to handle the event payment_intent.succeeded
-        break;
-      // ... handle other event types
-      default:
-        console.log(`Unhandled event type ${event.type}`);
+    
+    if(event.type === 'checkout.session.completed'){
+
+        const session = event.data.object;
+        const { orderId } = session.metadata;
+        const paymentStatus = session.payment_status;
+        const paymentMethod = session.payment_method_types[0];
+        const totalAmoutn = session.amount_total;
+
+    }else{
+        return
     }
     response.send();
 });  
