@@ -1,5 +1,5 @@
 import express from 'express';
-import { createCouponCtrl } from '../controllers/CouponController.js';
+import { createCouponCtrl, getAllCouponCtrl } from '../controllers/CouponController.js';
 
 const couponRoutes = express.Router();
 
@@ -8,5 +8,6 @@ import { isLoggedIN } from '../middlewares/isLoggedIn.js';
 
 //rotas
 couponRoutes.post('/', isLoggedIN, createCouponCtrl);
+couponRoutes.get('/', getAllCouponCtrl);
 
 export default couponRoutes;

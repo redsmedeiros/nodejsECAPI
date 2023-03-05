@@ -14,6 +14,15 @@ const stripe = new Stripe(process.env.STRIPE_KEY);
 //@access Private
 export const createOrderCtrl = expressAsyncHandler( async (req, res)=>{
 
+   //pegar o coupon
+   const { coupon } = req.query
+
+   if(coupon){
+      const couponFound = await Coupon.findOne({
+         code: coupon?.toUpperCase()
+      })
+   }
+
    //pegar o payload
    const { orderItems, shippingAddress, totalPrice } = req.body
 

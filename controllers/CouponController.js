@@ -24,7 +24,7 @@ export const createCouponCtrl = expressAsyncHandler( async (req, res)=>{
 
     //criar o cupon
     const coupon = await Coupon.create({
-        code,
+        code: code?.toUpperCase(),
         startDate,
         endDate,
         discount,
@@ -37,4 +37,18 @@ export const createCouponCtrl = expressAsyncHandler( async (req, res)=>{
         message: 'Coupon created successfully',
         coupon
     })
+})
+
+//@desc Get all coupon
+//@route GET /api/v1/coupon
+//@access Private/admin
+export const getAllCouponCtrl = expressAsyncHandler( async (req, res)=>{
+
+    const coupons = await Coupon.find()
+
+    res.status(200).json({
+        status: "success",
+        message: "All coupons",
+        coupons
+    });
 })
