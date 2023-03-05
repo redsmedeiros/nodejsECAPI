@@ -13,6 +13,7 @@ import reviewRoutes from '../routes/ReviewRoutes.js';
 import userRoutes from '../routes/UserRoutes.js';
 import Stripe from "stripe";
 import Order from '../model/Order.js';
+import couponRoutes from '../routes/CouponRoutes.js';
 
 
 
@@ -29,6 +30,7 @@ app.use('/api/v1/brands', brandRoutes)
 app.use('/api/v1/colors', colorRoutes)
 app.use('/api/v1/reviews/', reviewRoutes)
 app.use('/api/v1/orders/', ordersRoutes)
+app.use('/api/v1/coupon/', couponRoutes)
 
 //stripe webhook
 const stripe = new Stripe(process.env.STRIPE_KEY);
