@@ -52,3 +52,54 @@ export const getAllCouponCtrl = expressAsyncHandler( async (req, res)=>{
         coupons
     });
 })
+
+//@desc Get single coupon
+//@route GET /api/v1/coupon
+//@access Private/admin
+export const getSingleCouponCtrl = expressAsyncHandler( async (req, res)=>{
+
+    const coupon = await Coupon.findById(req.params.id);
+
+    res.json({
+        status: 'success',
+        message: 'Coupon fetched',
+        coupon
+    })
+
+})
+
+//@desc Update single coupon
+//@route PUT /api/v1/coupon
+//@access Private/admin
+export const updateCouponCtrl = expressAsyncHandler( async (req, res)=>{
+
+    const { code, startDate, endDate, discount } = req.body;
+
+    const coupon = await Coupon.findByIdAndUpdate(req.params.id, {
+        code: code?.toUpperCase(),
+        startDate,
+        endDate,
+        discount
+    }, { new: true })
+
+    res.json({
+        status: 'success',
+        message: 'Coupon fetched',
+        coupon
+    })
+
+})
+
+//@desc Delete single coupon
+//@route DELETE /api/v1/coupon
+//@access Private/admin
+export const deleteCouponCtrl = expressAsyncHandler( async (req, res)=>{
+
+    await Coupon.findByIdAndDelete(req.params.id);
+
+    res.json({
+        status: 'success',
+        message: 'Coupon deleted'
+    })
+
+})
