@@ -155,3 +155,36 @@ export const updateOrderToDelivery = expressAsyncHandler( async (req, res)=>{
          updateOrder
       })
 })
+
+//@desc get sales sum of orders
+//@route GET /api/v1/orders/sales/sum
+//@access Private/adim
+export const getSalesSumCtrl = expressAsyncHandler( async (req, res)=>{
+
+
+   const sales = await Order.aggregate([
+      {
+         $group: {
+            _id: null,
+            minimunSales: {
+               $min: "$totalPrice"
+            },
+            totalSales: {
+               $sum: "$totalPrice"
+            },
+            maxSales: {
+               $max: "$totalPrice"
+            },
+            avgSales: {
+               $avg: "totalPrice"
+            }
+         }
+      }
+   ])
+
+   res.json({
+      success: true,
+      message: "Sum of orders",
+      sales
+   })
+})

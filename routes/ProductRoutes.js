@@ -6,11 +6,12 @@ import { createProductCtrl, deleteProductCtrl, getProductCtrl, getProductsCtrl, 
 
 //importações de middlewares
 import { isLoggedIN } from '../middlewares/isLoggedIn.js';
+import upload from '../config/fileUpload.js'
 
 const productRoutes = express.Router()
 
 //rotas
-productRoutes.post('/', isLoggedIN, createProductCtrl)
+productRoutes.post('/', isLoggedIN, upload.single('file'), createProductCtrl)
 productRoutes.get('/', getProductsCtrl)
 productRoutes.get('/:id', getProductCtrl)
 productRoutes.put('/:id', isLoggedIN, updateProductCtrl)
